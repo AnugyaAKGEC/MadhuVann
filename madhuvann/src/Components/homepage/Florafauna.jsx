@@ -1,7 +1,11 @@
-import React from "react";
+
+import React, { useState } from "react";
 import animals from "../Assets/animals.jpeg";
 import flowers from "../Assets/flowers.jpeg";
-import clicks from "../Assets/click.jpeg";
+import clicks from "../Assets/click.png";
+import { Link } from "react-router-dom";
+import Album from "./Album";
+
 
 const GreenRectangleWithCircles = () => {
   const containerStyle = {
@@ -25,7 +29,7 @@ const GreenRectangleWithCircles = () => {
     position: "relative",
     width: "400px",
     height: "50px",
-    backgroundColor: "#020202",
+    backgroundColor: "#97b18e",
     margin: "1px auto 0",
     borderRadius: "50px",
     display: "flex",
@@ -71,14 +75,19 @@ const GreenRectangleWithCircles = () => {
     transform: "scaleX(-1)",
     borderRadius: "0 50rem 50rem 0",
   };
+  const [value, setvalue] = useState();
 
-  const handleSmallerRectanglesClick = () => {
-    console.log("Smaller Rectangles Clicked");
-  };
+  // const handleSmallerRectanglesClick = () => {
+  //     (e) => {
+  //       setvalue(e.target.value);
+  //       console.log("Mirrored Smaller Rectangles Clicked");
+  //     }
+  // };
 
-  const handleMirroredSmallerRectanglesClick = () => {
-    console.log("Mirrored Smaller Rectangles Clicked");
-  };
+  // const handleMirroredSmallerRectanglesClick = () => {
+  //   console.log("Mirrored Smaller Rectangles Clicked");
+  // };
+
 
   const smalrectangleText = {
     fontFamily: "DM Serif Display",
@@ -92,53 +101,57 @@ const GreenRectangleWithCircles = () => {
     <>
       <div style={containerStyle}>
         <div style={rectangleStyle}>
-          <img
-            src={flowers}
-            style={{
-              borderRadius: "50rem",
-              height: "300px",
-              position: "absolute",
-              top: "50%",
-              transform: "translateY(-50%)",
-              right: "22px",
-            }}
-          />
+          <Link to="/flora">
+            <img
+              src={flowers}
+              style={{
+                borderRadius: "50rem",
+                height: "300px",
+                position: "absolute",
+                top: "50%",
+                transform: "translateY(-50%)",
+                right: "22px",
+              }}
+            />
+          </Link>
         </div>
         <div style={mirroredRectangleStyle}>
-          <img
-            src={animals}
-            style={{
-              borderRadius: "50rem",
-              height: "300px",
-              position: "absolute",
-              top: "50%",
-              transform: "translateY(-50%)",
-              right: "22px",
-            }}
-          />
+          <Link to="/fauna">
+            <img
+              src={animals}
+              style={{
+                borderRadius: "50rem",
+                height: "300px",
+                position: "absolute",
+                top: "50%",
+                transform: "translateY(-50%)",
+                right: "22px",
+              }}
+            />
+          </Link>
         </div>
       </div>
-
       <div style={smalrectangle}>
-        <div
-          style={{ ...smallerrectangles, ...smalrectangleText }}
-          onClick={handleSmallerRectanglesClick}
-        >
-          Flora
-        </div>
+        <Link to="/flora">
+          {" "}
+          <div style={{ ...smallerrectangles, ...smalrectangleText }}>
+            Flora
+          </div>
+        </Link>
         <img
           src={clicks}
           style={{
             height: "50px",
           }}
         />
-        <div
-          style={{ ...secondsmallerrectangles, ...smalrectangleText }}
-          onClick={handleMirroredSmallerRectanglesClick}
-        >
-          Fauna
-        </div>
+
+        <Link to="/fauna">
+          <div style={{ ...secondsmallerrectangles, ...smalrectangleText }}>
+            Fauna
+          </div>
+        </Link>
       </div>
+      <Album value={value} />
       <style>
         {`
           @media (max-width: 768px) {
@@ -151,7 +164,7 @@ const GreenRectangleWithCircles = () => {
             ${smallerrectangles}
             ${smalrectangleText}
             ${secondsmallerrectangles}
-            // ... (additional styles for smaller screens)
+
           }
         `}
       </style>
