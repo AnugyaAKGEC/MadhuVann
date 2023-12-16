@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <div className="Flex_bar">
-      <div className="nav">
-        <img className="ham" src={ham} />
+      <div>
+        <Link to="/aboutUs"><img src={ham} height="20px" /></Link>
       </div>
       <Link to="/">
         <div>

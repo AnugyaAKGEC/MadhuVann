@@ -10,6 +10,8 @@ import IucnPage from "./Components/IUCN/iucn_page.jsx";
 import DetailedPage from "./Components/Description/description.jsx";
 import Holo from "./Components/hologram/hologram.jsx";
 import FaunaCardList from "./Components/fauna/fauna.jsx";
+import FloraFauna from "./Components/florafauna/Florafauna.jsx";
+import aboutUs from "./Components/AboutUs/aboutUs.jsx";
 
 function App() {
   return (
@@ -25,6 +27,9 @@ function App() {
           <Route path="/IUCN" exact element={<IucnPage />} />
           <Route path="/details/:id" element={<DetailedPage />} />
           <Route path="/holo/:id" element={<Holo />} />
+          <Route path="/florafauna" exact element={<FloraFauna />} />
+          <Route path="/aboutUs" exact element={<aboutUs />} />
+
         </Routes>
       </Router>
     </div>
