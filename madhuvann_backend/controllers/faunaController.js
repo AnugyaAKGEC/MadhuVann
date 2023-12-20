@@ -3,6 +3,8 @@ const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
 const cloudinary = require("../utils/cloudinary");
+const { Readable } = require('stream');
+
 
 //create florafauna
 exports.createFloraFauna = catchAsyncErrors(async (req, res, next) => {
@@ -30,27 +32,42 @@ exports.createFloraFauna = catchAsyncErrors(async (req, res, next) => {
     })
   );
 
-  // let video =[]
+  req.body.images = imagesLink;
 
-  // if(typeof req.files.video === "string"){
-  //   video.push(req.files.video);
-  // } else {
-  //   video = req.files.video;
-  // }
+  // const file = req.files.audio;
+  // console.log(file);
+  // const audioStream = Readable.from(req.file.data)
+  //   const resul = await cloudinary.uploader.upload(file.tempFilePath ,{
+  //     folder:"florafaunaaudios",
+  //   });
 
-  // let videoLink = await cloudinary.uploader.upload(tempFilePath, {
-  //   folder: "florafaunas",
-  // })
+  // console.log(resul);
+
+
+
+//  let audio =[]
+
+//  const file = req.files.audio
+//   if(typeof req.files.audio === "string"){
+//   audio.push(req.files.audio);
+//   } else {
+//     audio = req.files.audio;
+//   }
+//   console.log(file);
+//   console.log(file.tempFilePath);
+
+//   let audioLink = await cloudinary.uploader.upload('file.tempFilePath', { resource_type: 'video' }, {
+//     folder: "florafaunasvoice",
+//   })
 
   // return {
-  //   public_id : videoLink.public_id,
-  //   url: videoLink.secure_url,
+  //   url: audioLink.secure_url,
   // }
 
-  // console.log("KLDSJFJ");
-  // console.log(imagesLink);
+  // req.body.audio = audioLink.secure_url
+ 
 
-  req.body.images = imagesLink;
+
 
   const fauna = await Fauna.create(req.body);
 
@@ -59,6 +76,12 @@ exports.createFloraFauna = catchAsyncErrors(async (req, res, next) => {
     fauna,
   });
 });
+
+ 
+  // console.log("KLDSJFJ");
+  // console.log(imagesLink);
+
+  
 
 //Get all flora faunas
 
