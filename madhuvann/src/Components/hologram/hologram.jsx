@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./hologram.css";
 import { useNavigate } from "react-router-dom";
-import JungleSound from "../audios/junglesound.mp3";
+
 import holo from "../Assets/holo_mode.png";
 import TextToSpeechToggle from "../tts/tts";
 
@@ -26,12 +26,6 @@ const Holo = () => {
         const data = await response.json();
 
         setHoloData(data.fauna);
-
-        // let music = new Audio(JungleSound);
-        // music.play();
-        // if(Back) {
-        //   music.pause();
-        // }
       } catch (error) {
         console.error("Error fetching detailed information:", error.message);
       } finally {
@@ -52,12 +46,13 @@ const Holo = () => {
 
   const data = holoData.description;
   const image2 = holoData.images[1].url;
+  const audio = holoData.audio;
   function Back() {
     const navigate = useNavigate();
     const goBack = () => {
       navigate(-1);
     };
-    
+
     return (
       <>
         <button
@@ -72,8 +67,28 @@ const Holo = () => {
 
   return (
     <div>
-      <div style={{ backgroundColor: "black" }}>
-        <Back />
+      <div
+        style={{
+          backgroundColor: "black",
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "2rem",
+          alignItems: "center",
+        }}
+      >
+        <div>
+          {" "}
+          <iframe
+            frameborder="0"
+            scrolling="no"
+            src={holoData.audio}
+            width="50"
+            height="30"
+          ></iframe>
+        </div>
+        <div>
+          <Back />
+        </div>
       </div>
       <div className="page">
         <div className="page-div">
@@ -98,7 +113,9 @@ const Holo = () => {
           </div>
         </div>
       </div>
-      <TextToSpeechToggle textToRead={data} />
+      <div style={{ backgroundColor: "black" }}>
+        <TextToSpeechToggle textToRead={data} />
+      </div>
     </div>
   );
 };
